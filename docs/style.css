@@ -292,3 +292,13 @@ pre.out {
 .fig .t-bad { fill: var(--del-sign); font-weight: 600; }
 .fig .t-good { fill: var(--add-sign); font-weight: 600; }
 @media (max-width: 900px) { .fig { padding: 10px 6px; } }
+
+.fig .num-s { font-size: 15px; font-weight: 700; }
+.fig .tiny { fill: var(--muted); font-size: 10.5px; }
+.fig .ax-b { fill: var(--muted); fill-opacity: 0.08; stroke: var(--muted); stroke-width: 1.2; }
+.fig .ax-t { fill: var(--accent); fill-opacity: 0.12; stroke: var(--accent); stroke-width: 1.4; }
+.fig .ax-h { fill: var(--t-fn); fill-opacity: 0.12; stroke: var(--t-fn); stroke-width: 1.4; }
+.fig .ax-d { fill: var(--t-num); fill-opacity: 0.10; stroke: var(--t-num); stroke-width: 1.4; }
+.fig .attn-box { fill: none; stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 5 4; }
+.fig .attn-label { fill: var(--accent); font-size: 12px; }
+.fig .attn-label-bg { fill: var(--surface); }
