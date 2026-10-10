@@ -304,3 +304,5 @@ pre.out {
 .fig .attn-label-bg { fill: var(--surface); }
 .fig .seg { fill-opacity: 0.55; }
 .fig .seg-frame { fill: none; stroke: var(--t-num); stroke-width: 1.4; }
+.fig .fan { stroke: var(--fg); stroke-opacity: 0.45; stroke-width: 1; }
+.fig .pick { fill: none; stroke: var(--fg); stroke-width: 2; }
