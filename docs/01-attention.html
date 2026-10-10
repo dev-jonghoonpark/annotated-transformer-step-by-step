@@ -43,7 +43,41 @@
 <li>가중치 행렬의 각 행을 더하면 1이다.</li>
 <li>출력 첫 번째 토큰을 가중치로 직접 섞어 계산한 값과 비교하면 똑같다.</li>
 <li>나누지 않으면 <code>d_k=512</code>에서 softmax가 한두 칸에 거의 전부를 몰아준다. 나누면 고르게 퍼진다.</li>
-</ul></article>
+</ul>
+<h2>참고: <code>key.transpose(-2, -1)</code>의 <code>-2</code>, <code>-1</code></h2>
+<p><code>transpose(dim0, dim1)</code>는 텐서의 두 차원을 맞바꾼다. 인자는 차원 번호이고, 음수는 뒤에서부터 센다. <code>-1</code>은 마지막 차원, <code>-2</code>는 그 앞 차원이다.</p>
+<p>이 단계의 key는 <code>(batch, 토큰 수, d_k)</code> = <code>(1, 3, 4)</code> 모양이다.</p>
+<table>
+<thead>
+<tr>
+<th>차원 번호</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>음수로 쓰면</td>
+<td>-3</td>
+<td>-2</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>의미</td>
+<td>batch</td>
+<td>토큰 수</td>
+<td>d_k</td>
+</tr>
+</tbody>
+</table>
+<p><code>key.transpose(-2, -1)</code>은 토큰 수와 d_k 자리를 바꿔 <code>(1, 4, 3)</code>을 만든다. 수식의 $K^T$다.</p>
+<ul>
+<li><code>torch.matmul</code>은 <strong>마지막 두 차원끼리</strong> 행렬곱을 하고, 그 앞 차원(batch)은 그대로 둔다.</li>
+<li>그래서 <code>query (1, 3, 4) @ keyᵀ (1, 4, 3)</code> → <code>scores (1, 3, 3)</code>이 된다. <code>scores[0, i, j]</code>가 "i번째 query와 j번째 key의 내적"이다.</li>
+<li>transpose 없이 <code>(1, 3, 4) @ (1, 3, 4)</code>를 하면 안쪽 차원(4와 3)이 맞지 않아 에러가 난다.</li>
+</ul>
+<p><strong>왜 <code>transpose(1, 2)</code>가 아니라 음수로 쓸까?</strong> 3단계 Multi-Head Attention에서 key는 <code>(batch, head, 토큰 수, d_k)</code>, 4차원이 된다. 이때 <code>transpose(1, 2)</code>라고 쓰면 head와 토큰 수가 바뀌어 틀린 계산이 된다. <code>-2, -1</code>은 앞에 차원이 몇 개 붙든 항상 "마지막 두 차원"을 가리키므로 같은 <code>attention</code> 함수를 3차원에도 4차원에도 그대로 쓸 수 있다. 참고로 최신 PyTorch에서는 같은 일을 하는 <code>key.mT</code>도 있다.</p></article>
 
 <section class="block">
   <div class="block-head">
