@@ -12,3 +12,9 @@ head 하나의 d_k: 64 = 512 / 8
 
 2) PyTorch 내장 nn.MultiheadAttention과 같은 계산인가?
    최대 차이: 9.69e-08
+
+3) W_O(linears[-1])는 head들의 결과를 섞는다
+   concat 모양: (1, 6, 32)  → W_O 통과 → (1, 6, 32)
+   ours(y, y, y)와 차이: 0.0e+00
+   Σ head_i @ W_O의 i번째 블록 + bias 와 차이: 6.0e-08
+   → 출력 한 칸 한 칸이 head 4개 모두의 결과를 섞은 값이다

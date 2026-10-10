@@ -41,3 +41,21 @@ mask = subsequent_mask(6)
 a = ours(y, y, y, mask=mask)
 b, _ = ref(y, y, y, attn_mask=~mask[0])  # PyTorch는 True가 '가림'
 print("   최대 차이:", f"{(a - b).abs().max().item():.2e}")
+print()
+
+print("3) W_O(linears[-1])는 head들의 결과를 섞는다")
+# ours의 forward를 단계별로 다시 따라가며 head별 출력을 꺼낸다 (head 4개, d_k 8)
+from transformer import attention
+
+h, d_k = ours.h, ours.d_k
+q, k, v = [lin(y).view(1, -1, h, d_k).transpose(1, 2) for lin in ours.linears[:3]]
+heads, _ = attention(q, k, v)  # (1, 4, 6, 8)
+concat = heads.transpose(1, 2).reshape(1, 6, h * d_k)  # head를 옆으로 이어 붙인 (1, 6, 32)
+W_O = ours.linears[-1]
+print("   concat 모양:", tuple(concat.shape), " → W_O 통과 →", tuple(W_O(concat).shape))
+print("   ours(y, y, y)와 차이:", f"{(W_O(concat) - ours(y, y, y)).abs().max().item():.1e}")
+# concat @ W_O 는 'head마다 W_O의 자기 몫(8열)을 곱해 더한 것'과 같다
+per_head = [heads[:, i] @ W_O.weight[:, i * d_k:(i + 1) * d_k].T for i in range(h)]
+print("   Σ head_i @ W_O의 i번째 블록 + bias 와 차이:",
+      f"{(sum(per_head) + W_O.bias - W_O(concat)).abs().max().item():.1e}")
+print("   → 출력 한 칸 한 칸이 head 4개 모두의 결과를 섞은 값이다")
