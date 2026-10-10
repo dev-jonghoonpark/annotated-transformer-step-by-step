@@ -1,0 +1,33 @@
+Finished.
+Vocabulary sizes:
+8316
+6384
+
+한 배치 (batch_size=3, max_padding=16)
+src (3, 16)
+tensor([[   0,  124,  508, 2153,   19,  907,    4,    1,    2,    2,    2,    2,
+            2,    2,    2,    2],
+        [   0, 1071,   45,  114,   92,    9,  747,  202,    8, 1422,  845,   50,
+            4,    1,    2,    2],
+        [   0,   21,   43,    9,   18,   10,    6,   52,   41,    9,   56,   57,
+           66,   10,  338,   11]])
+tgt (3, 16)
+tensor([[   0,   49, 1012,   17,  231,   50,    8,  516,    5,    1,    2,    2,
+            2,    2,    2,    2],
+        [   0, 2080,   13,   25,   35,   14,   27,  157,   11,  303,  531,    5,
+            1,    2,    2,    2],
+        [   0,   19,   22,   15,   52,    7,    4,   32,   23,   15,   17,   31,
+           48,    8,   47,  605]])
+
+id를 다시 단어로
+  de: <s> Die Wanderer erklimmen die Berge . </s> <blank> <blank> <blank> <blank> <blank> <blank> <blank> <blank>
+  en: <s> The hikers are climbing up the mountains . </s> <blank> <blank> <blank> <blank> <blank> <blank>
+  de: <s> Nahaufnahme eines kleinen Jungen , dessen Gesicht und Körper bemalt ist . </s> <blank> <blank>
+  en: <s> Closeup of young boy with his face and body painted . </s> <blank> <blank> <blank>
+  de: <s> Zwei Personen , eine mit einem roten Hemd , sitzen am Wasser mit blicken auf
+  en: <s> Two people , one in a red shirt , are sitting by the water facing
+
+Batch로 감싸면 학습에 필요한 마스크가 붙는다
+  src_mask (3, 1, 16)  tgt_mask (3, 15, 15)  ntokens 36
+
+학습 배치 수: 9,667 (batch_size=3일 때). 실제 학습은 batch_size=32, max_padding=72

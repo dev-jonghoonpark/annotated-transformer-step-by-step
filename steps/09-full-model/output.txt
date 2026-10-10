@@ -1,0 +1,14 @@
+EncoderDecoder의 다섯 부품
+  encoder      18,915,328  Encoder
+  decoder      25,225,216  Decoder
+  src_embed     4,257,792  Sequential
+  tgt_embed     3,268,608  Sequential
+  generator     3,274,992  Generator
+  합계           54,941,936
+
+src (1, 9) → encode → (1, 9, 512)
+tgt (1, 5) → decode → (1, 5, 512)
+generator → (1, 5, 6384)  (다음 토큰의 로그 확률)
+확률 합: ['1.000', '1.000', '1.000', '1.000', '1.000']
+
+xavier_uniform_ 초기화: w_1 값 범위 ±0.0484  (이론 한계 √(6/(512+2048)) = 0.0484)

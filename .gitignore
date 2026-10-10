@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.data/
+*.pt
+vocab.json
+attention.html
+.ipynb_checkpoints
+.work/
+.claude/

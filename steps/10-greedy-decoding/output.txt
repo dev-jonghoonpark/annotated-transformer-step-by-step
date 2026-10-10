@@ -1,0 +1,12 @@
+Example Untrained Model Prediction: tensor([[0, 6, 4, 3, 3, 3, 3, 3, 3, 3]])
+Example Untrained Model Prediction: tensor([[0, 9, 2, 9, 2, 9, 2, 9, 2, 9]])
+Example Untrained Model Prediction: tensor([[0, 8, 6, 9, 8, 6, 6, 6, 6, 6]])
+Example Untrained Model Prediction: tensor([[ 0,  7,  3,  8,  7,  3, 10,  8,  7,  3]])
+Example Untrained Model Prediction: tensor([[ 0, 10,  0, 10,  0, 10, 10,  0, 10,  0]])
+Example Untrained Model Prediction: tensor([[0, 2, 2, 2, 8, 1, 9, 0, 7, 4]])
+Example Untrained Model Prediction: tensor([[0, 1, 7, 1, 7, 1, 7, 1, 7, 6]])
+Example Untrained Model Prediction: tensor([[0, 7, 2, 8, 9, 3, 3, 3, 3, 3]])
+Example Untrained Model Prediction: tensor([[0, 5, 9, 1, 6, 3, 9, 1, 5, 5]])
+Example Untrained Model Prediction: tensor([[0, 4, 0, 0, 4, 0, 4, 0, 0, 0]])
+
+→ 아직 학습하지 않아서 입력과 상관없는 토큰을 반복한다. 14단계에서 이 모델에 복사를 가르친다

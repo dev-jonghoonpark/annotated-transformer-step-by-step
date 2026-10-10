@@ -1,0 +1,26 @@
+[project]
+name = "annotated-transformer-step-by-step"
+version = "0.1.0"
+description = "The Annotated Transformer를 부품 하나씩 직접 만들어 보는 단계별 튜토리얼"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.6",
+    "pandas",
+    "altair>=5",
+    # Step 10~11 (Multi30k 독→영 번역)
+    "datasets",
+    "spacy>=3.8",
+    "de-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-3.8.0/de_core_news_sm-3.8.0-py3-none-any.whl",
+    "en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl",
+    "gputil>=1.4.0",
+    "markdown>=3.10.3",
+    "pygments>=2.21.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,20 @@
+Multi30k: train 29,000 / valid 1,014 / test 1,000 문장쌍
+
+첫 문장쌍
+  de: Zwei junge weiße Männer sind im Freien in der Nähe vieler Büsche.
+  en: Two young, White males are outside near many bushes.
+  de 토큰: ['Zwei', 'junge', 'weiße', 'Männer', 'sind', 'im', 'Freien', 'in', 'der', 'Nähe', 'vieler', 'Büsche', '.']
+  en 토큰: ['Two', 'young', ',', 'White', 'males', 'are', 'outside', 'near', 'many', 'bushes', '.']
+
+Building German Vocabulary ...
+Building English Vocabulary ...
+Finished.
+Vocabulary sizes:
+8316
+6384
+
+독일어 사전 앞 20개: ['<s>', '</s>', '<blank>', '<unk>', '.', 'Ein', 'einem', 'in', 'und', ',', 'mit', 'auf', 'Mann', 'einer', 'Eine', 'ein', 'der', 'Frau', 'eine', 'die']
+영어 사전 앞 20개 : ['<s>', '</s>', '<blank>', '<unk>', 'a', '.', 'A', 'in', 'the', 'on', 'is', 'and', 'man', 'of', 'with', ',', 'woman', 'are', 'to', 'Two']
+
+영어 문장 → id: [19, 25, 15, 1138, 822, 17, 58, 84, 335, 1359, 5]
+사전에 없는 단어 'Transformerology' → 3 (<unk>)

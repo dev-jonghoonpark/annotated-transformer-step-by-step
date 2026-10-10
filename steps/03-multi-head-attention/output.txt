@@ -1,0 +1,14 @@
+입력           : (2, 10, 512)
+출력           : (2, 10, 512)  ← 입력과 같은 모양
+head별 가중치  : (2, 8, 10, 10)  (batch, head, query, key)
+head 하나의 d_k: 64 = 512 / 8
+
+파라미터 수: 1,050,624  = 4 × (512×512 + 512)  (W_Q, W_K, W_V, W_O)
+
+1) 프로젝션 후 head로 쪼개는 모양 변화
+   linear(x)               (2, 10, 512)
+   .view(B, -1, h, d_k)     (2, 10, 8, 64)
+   .transpose(1, 2)         (2, 8, 10, 64)  ← head가 batch처럼 앞으로
+
+2) PyTorch 내장 nn.MultiheadAttention과 같은 계산인가?
+   최대 차이: 9.69e-08

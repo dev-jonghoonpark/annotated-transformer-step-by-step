@@ -1,0 +1,22 @@
+# 어텐션 한 줄부터
+
+- 원본: [어텐션](https://dev-jonghoonpark.github.io/annotated-transformer-modern/#attention)
+
+Transformer를 한 문장으로 줄이면 "모든 토큰이 다른 모든 토큰을 얼마나 참고할지 스스로 정해서 섞는 모델"이다. 그 "섞는" 연산이 어텐션이고, 나머지 부품은 전부 이 연산을 잘 돌리기 위한 장치다. 그래서 첫 줄은 어텐션부터 쓴다.
+
+![Scaled Dot-Product Attention](images/ModalNet-19.png)
+
+$$\mathrm{Attention}(Q, K, V) = \mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+- **query와 key의 내적** `QK^T`: "i번째 토큰이 j번째 토큰과 얼마나 관련 있는가"를 점수로 매긴다.
+- **softmax**: 점수를 행마다 합이 1인 가중치로 바꾼다.
+- **value에 곱하기**: 그 가중치로 value 벡터들을 섞는다. 출력 토큰 하나는 입력 토큰들의 가중 평균이다.
+- **`/ math.sqrt(d_k)`**: 벡터 차원이 커질수록 내적값이 커져서 softmax가 한 칸에 쏠린다. 차원 수의 제곱근으로 나눠 이를 막는다.
+
+함수가 결과와 함께 가중치 `p_attn`도 돌려주는 점을 기억해 두자. 마지막 단계에서 이 가중치를 그림으로 그린다.
+
+## 실행 결과에서 볼 것
+
+- 가중치 행렬의 각 행을 더하면 1이다.
+- 출력 첫 번째 토큰을 가중치로 직접 섞어 계산한 값과 비교하면 똑같다.
+- 나누지 않으면 `d_k=512`에서 softmax가 한두 칸에 거의 전부를 몰아준다. 나누면 고르게 퍼진다.

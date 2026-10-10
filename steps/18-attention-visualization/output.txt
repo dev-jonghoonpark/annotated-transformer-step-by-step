@@ -1,0 +1,23 @@
+── 인코더 셀프 어텐션 ──
+
+Source Text (Input)        : <s> Ein Mann balanciert einen <unk> auf seinem Arm . </s>
+Target Text (Ground Truth) : <s> A man is balancing a metal ball on his arm . </s>
+Model Output               : <s> A man is balancing a <unk> on his arm . </s>
+
+[[chart:encoder_self]]
+
+── 디코더 셀프 어텐션 ──
+
+Source Text (Input)        : <s> Eine Frau in gestreiften Strumpfhosen wird von Schnüren gelenkt . </s>
+Target Text (Ground Truth) : <s> A woman in striped tights is being <unk> with strings . </s>
+Model Output               : <s> A woman in a striped dress is being <unk> by <unk> . </s>
+
+[[chart:decoder_self]]
+
+── 디코더 소스 어텐션 ──
+
+Source Text (Input)        : <s> Eine Frau in <unk> Sportkleidung fährt Rollschuh . </s>
+Target Text (Ground Truth) : <s> A woman is rollerblading in a skimpy uniform . </s>
+Model Output               : <s> A woman in athletic clothes is rollerskating . </s>
+
+[[chart:decoder_src]]

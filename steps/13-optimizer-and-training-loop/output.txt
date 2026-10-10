@@ -1,0 +1,10 @@
+rate(step, model_size=512, factor=1, warmup=4000)
+  step      1: 1.75e-07
+  step   1000: 1.75e-04
+  step   2000: 3.49e-04
+  step   4000: 6.99e-04
+  step   8000: 4.94e-04
+  step  20000: 3.13e-04
+→ 4000스텝까지 직선으로 오르고, 그 뒤로 1/√step으로 내려간다
+
+[[chart:learning_rate]]
