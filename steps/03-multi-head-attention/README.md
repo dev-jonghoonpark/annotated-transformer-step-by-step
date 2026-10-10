@@ -23,10 +23,6 @@ $$\mathrm{MultiHead}(Q, K, V) = \mathrm{Concat}(\mathrm{head_1}, ..., \mathrm{he
 
 ## 참고
 
-### W_O(`self.linears[-1]`)의 역할
-
-head 8개의 결과(64차원씩)를 이어 붙이면 다시 512차원이 되지만, 이 상태에서는 0~63번 칸에 head 1 결과만, 64~127번 칸에 head 2 결과만 들어 있어 head끼리 정보가 섞이지 않는다. 마지막 `nn.Linear(512, 512)`가 이 512칸 전체를 섞어서 출력 한 칸 한 칸이 모든 head의 결과를 반영하게 만든다. 수식으로는 $\mathrm{Concat}(\mathrm{head_1}, ..., \mathrm{head_h})W^O = \sum_i \mathrm{head_i} W^O_i$, 즉 head마다 W_O의 자기 몫(64행)을 곱해 **더하는** 것과 같다. 출력 크기를 다시 d_model로 맞춰 다음 층에 넘기는 역할도 한다.
-
 ### `forward`가 하는 일
 
 `forward`는 모듈을 함수처럼 부를 때 실행되는 본체다. 데모에서 `mha = MultiHeadedAttention(h=8, d_model=512)`(mha = Multi-Head Attention)로 만든 뒤 `mha(x, x, x)`라고 부르면 이 함수가 돈다. 코드 주석의 1) 2) 3) 순서로 읽으면 된다. 모양은 데모 기준(문장 2개, 토큰 10개, d_model 512, head 8개)이다.
@@ -37,6 +33,10 @@ head 8개의 결과(64차원씩)를 이어 붙이면 다시 512차원이 되지�
 - **3) 합치기**: `.transpose(1, 2)`로 `(2, 10, 8, 64)`로 되돌리고 `.view(2, -1, 512)`로 head를 옆으로 이어 붙인(Concat) 뒤 W_O(`linears[-1]`)를 통과시킨다. 중간의 `.contiguous()`는 transpose로 흐트러진 메모리 배치를 다시 정리하는 것이다. 이게 없으면 `view`가 에러를 낸다.
 
 마지막의 `del query, key, value`는 중간 텐서를 일찍 놓아 메모리를 아끼려는 줄이고, 결과에는 영향이 없다.
+
+### W_O(`self.linears[-1]`)의 역할
+
+head 8개의 결과(64차원씩)를 이어 붙이면 다시 512차원이 되지만, 이 상태에서는 0~63번 칸에 head 1 결과만, 64~127번 칸에 head 2 결과만 들어 있어 head끼리 정보가 섞이지 않는다. 마지막 `nn.Linear(512, 512)`가 이 512칸 전체를 섞어서 출력 한 칸 한 칸이 모든 head의 결과를 반영하게 만든다. 수식으로는 $\mathrm{Concat}(\mathrm{head_1}, ..., \mathrm{head_h})W^O = \sum_i \mathrm{head_i} W^O_i$, 즉 head마다 W_O의 자기 몫(64행)을 곱해 **더하는** 것과 같다. 출력 크기를 다시 d_model로 맞춰 다음 층에 넘기는 역할도 한다.
 
 ### head 축을 앞으로 빼는 이유 (`transpose(1, 2)`)
 
