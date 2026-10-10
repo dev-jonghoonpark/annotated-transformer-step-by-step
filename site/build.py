@@ -228,6 +228,9 @@ def step_page(steps, i):
     nav += (f'<a class="next" href="{nxt["slug"]}.html"><small>다음 {nxt["num"]:02d} →</small>{html.escape(nxt["title"])}</a>'
             if nxt else '<a class="next" href="index.html"><small>끝 →</small>처음으로</a>')
     nav += "</nav>"
+    notes = ""
+    if s["notes_html"]:
+        notes = f'<section class="block notes"><div class="block-head"><h2>참고</h2></div><div class="prose">{s["notes_html"]}</div></section>'
     progress = s["num"] / len(steps) * 100
     return (
         HEAD.format(title=f'{s["num"]:02d}. {html.escape(s["title"])} · Annotated Transformer 한 단계씩',
@@ -263,6 +266,7 @@ def step_page(steps, i):
   <details class="demo"><summary>실행한 코드 <code>demo.py</code> 보기</summary>{render_plain_code(s["demo"])}</details>
   <div class="outputs">{render_output(s, s["output"])}</div>
 </section>
+{notes}
 {nav}
 <footer class="foot">코드: <a href="https://github.com/harvardnlp/annotated-transformer" target="_blank" rel="noopener">harvardnlp/annotated-transformer</a> (MIT) · 설명·구성: <a href="{REPO}" target="_blank" rel="noopener">annotated-transformer-step-by-step</a></footer>
 </main>
@@ -337,12 +341,14 @@ def load_steps():
     for d in sorted(p for p in STEPS_DIR.iterdir() if p.is_dir()):
         readme = (d / "README.md").read_text()
         title, body = readme.split("\n", 1)
+        body, _, notes = body.partition("\n## 참고\n")
         rec = d / "RECORDED.md"
         steps.append({
             "slug": d.name,
             "num": int(d.name[:2]),
             "title": title.lstrip("# ").strip(),
             "body_html": render_md(body),
+            "notes_html": render_md(notes) if notes.strip() else "",
             "code": (d / "transformer.py").read_text(),
             "demo": (d / "demo.py").read_text(),
             "output": (d / "output.txt").read_text(),
