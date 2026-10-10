@@ -271,3 +271,24 @@ pre.out {
   .bars { gap: 3px; height: 140px; }
   .bar .lbl { font-size: 10px; }
 }
+
+/* ── 인라인 그림 ─────────────────────────────── */
+.fig { margin: 16px 0 28px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.fig svg { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; }
+.fig text { fill: var(--fg); font-size: 14px; font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif; }
+.fig .num { font-size: 18px; font-weight: 700; }
+.fig .muted { fill: var(--muted); font-size: 12.5px; }
+.fig .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+.fig .strong { font-weight: 700; }
+.fig .box { fill: var(--surface); stroke: var(--muted); stroke-width: 1.2; }
+.fig .tbl { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; }
+.fig .grp { fill: var(--code-bg); stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.fig .bad { fill: var(--del-bg); stroke: var(--del-sign); stroke-width: 1.6; }
+.fig .good { fill: var(--add-bg); stroke: var(--add-sign); stroke-width: 1.6; }
+.fig .hit { fill: var(--accent); }
+.fig .grid { stroke: var(--accent); stroke-opacity: 0.25; }
+.fig .line { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.fig .arrowhead { fill: var(--muted); }
+.fig .t-bad { fill: var(--del-sign); font-weight: 600; }
+.fig .t-good { fill: var(--add-sign); font-weight: 600; }
+@media (max-width: 900px) { .fig { padding: 10px 6px; } }
