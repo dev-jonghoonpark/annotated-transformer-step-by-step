@@ -89,7 +89,7 @@ d_k=512, key 10개일 때 softmax 결과
   → 나누지 않으면 한 칸에 거의 다 몰려서(포화) 기울기가 사라진다</pre></div>
 </section>
 <section class="block notes"><div class="block-head"><h2>참고</h2></div><div class="prose"><h3><code>key.transpose</code> 인자 <code>(-2, -1)</code>의 의미</h3>
-<p>마지막 두 차원(토큰 수, d_k)을 맞바꿔 $K^T$를 만든다. 음수는 뒤에서 센 차원 번호라 3단계의 4차원 텐서에도 그대로 통한다. (<a target="_blank" rel="noopener" href="https://docs.pytorch.org/docs/stable/generated/torch.transpose.html">torch.transpose 문서</a>)</p></div></section>
+<p>key는 문장 여러 개를 묶은 <code>(batch, 토큰 수, d_k)</code> 3차원이라, 행렬처럼 "뒤집는다"고만 하면 어느 두 축을 바꿀지 정해지지 않는다(<code>key.T</code>는 모든 축을 거꾸로 해 <code>(4, 3, 1)</code>이 된다). 앞쪽 축은 "표를 몇 장 쌓았나"일 뿐이고 표 한 장은 맨 뒤 두 축이므로, 그 두 축(토큰 수, d_k)만 맞바꿔 $K^T$를 만든다. 음수는 뒤에서 센 차원 번호라 3단계의 4차원 텐서에도 그대로 통한다. (<a target="_blank" rel="noopener" href="https://docs.pytorch.org/docs/stable/generated/torch.transpose.html">torch.transpose 문서</a>)</p></div></section>
 <nav class="pager"><a class="prev" href="index.html"><small>← 처음으로</small>소개</a><a class="next" href="02-masking.html"><small>다음 02 →</small>보면 안 되는 칸 가리기</a></nav>
 <footer class="foot">코드: <a href="https://github.com/harvardnlp/annotated-transformer" target="_blank" rel="noopener">harvardnlp/annotated-transformer</a> (MIT) · 설명·구성: <a href="https://github.com/dev-jonghoonpark/annotated-transformer-step-by-step" target="_blank" rel="noopener">annotated-transformer-step-by-step</a></footer>
 </main>

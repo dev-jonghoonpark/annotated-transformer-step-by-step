@@ -25,4 +25,4 @@ $$\mathrm{Attention}(Q, K, V) = \mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\ri
 
 ### `key.transpose` 인자 `(-2, -1)`의 의미
 
-마지막 두 차원(토큰 수, d_k)을 맞바꿔 $K^T$를 만든다. 음수는 뒤에서 센 차원 번호라 3단계의 4차원 텐서에도 그대로 통한다. ([torch.transpose 문서](https://docs.pytorch.org/docs/stable/generated/torch.transpose.html))
+key는 문장 여러 개를 묶은 `(batch, 토큰 수, d_k)` 3차원이라, 행렬처럼 "뒤집는다"고만 하면 어느 두 축을 바꿀지 정해지지 않는다(`key.T`는 모든 축을 거꾸로 해 `(4, 3, 1)`이 된다). 앞쪽 축은 "표를 몇 장 쌓았나"일 뿐이고 표 한 장은 맨 뒤 두 축이므로, 그 두 축(토큰 수, d_k)만 맞바꿔 $K^T$를 만든다. 음수는 뒤에서 센 차원 번호라 3단계의 4차원 텐서에도 그대로 통한다. ([torch.transpose 문서](https://docs.pytorch.org/docs/stable/generated/torch.transpose.html))
