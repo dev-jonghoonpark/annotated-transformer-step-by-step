@@ -108,9 +108,10 @@ def render_diff(old, new):
                 continue
             rows += [row("ctx", i1 + k + 1, j1 + k + 1, hb[j1 + k]) for k in range(head)]
             hidden = [row("ctx", i1 + k + 1, j1 + k + 1, hb[j1 + k]) for k in range(head, n - tail)]
+            # tbody는 중첩할 수 없으므로 현재 tbody를 닫고 접힘 버튼·숨긴 줄을 별도 tbody로 둔다
             rows.append(
-                f'<tr class="fold"><td colspan="4"><button type="button">⋯ 그대로인 {len(hidden)}줄 펼치기</button></td></tr>'
-                f'<tbody class="hidden">{"".join(hidden)}</tbody>'
+                f'</tbody><tbody class="fold"><tr><td colspan="4"><button type="button">⋯ 그대로인 {len(hidden)}줄 펼치기</button></td></tr></tbody>'
+                f'<tbody class="hidden">{"".join(hidden)}</tbody><tbody>'
             )
             rows += [row("ctx", i1 + k + 1, j1 + k + 1, hb[j1 + k]) for k in range(n - tail, n)]
         else:

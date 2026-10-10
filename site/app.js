@@ -23,11 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 접힌 줄 펼치기
-  document.querySelectorAll(".diff tr.fold button").forEach((btn) => {
+  document.querySelectorAll(".diff tbody.fold button").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const fold = btn.closest("tr");
-      const hidden = fold.nextElementSibling;
-      if (hidden && hidden.classList.contains("hidden")) hidden.classList.remove("hidden");
+      const fold = btn.closest("tbody");
+      fold.nextElementSibling.classList.remove("hidden");
       fold.remove();
     });
   });

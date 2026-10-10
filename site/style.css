@@ -176,12 +176,12 @@ article.prose > ul:first-child { list-style: none; padding: 0; color: var(--mute
 .code tr:last-child td { padding-bottom: 10px; }
 .code.full .ln { min-width: 3.6em; }
 .diff tbody.hidden { display: none; }
-.diff tr.fold td { padding: 2px 0; background: var(--bg); }
-.diff tr.fold button {
+.diff tbody.fold td { padding: 2px 0; background: var(--bg); }
+.diff tbody.fold button {
   width: 100%; font: inherit; font-size: 12.5px; color: var(--muted); background: transparent;
   border: none; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); padding: 4px; cursor: pointer;
 }
-.diff tr.fold button:hover { color: var(--accent); }
+.diff tbody.fold button:hover { color: var(--accent); }
 
 .code .k, .code .kn, .code .kc, .code .kd, .code .kr, .code .ow { color: var(--t-kw); }
 .code .nf, .code .fm { color: var(--t-fn); }
