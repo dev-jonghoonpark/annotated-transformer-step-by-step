@@ -302,3 +302,5 @@ pre.out {
 .fig .attn-box { fill: none; stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 5 4; }
 .fig .attn-label { fill: var(--accent); font-size: 12px; }
 .fig .attn-label-bg { fill: var(--surface); }
+.fig .seg { fill-opacity: 0.55; }
+.fig .seg-frame { fill: none; stroke: var(--t-num); stroke-width: 1.4; }
