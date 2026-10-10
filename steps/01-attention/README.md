@@ -23,4 +23,6 @@ $$\mathrm{Attention}(Q, K, V) = \mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\ri
 
 ## 참고
 
-- `key.transpose(-2, -1)`: 마지막 두 차원(토큰 수, d_k)을 맞바꿔 $K^T$를 만든다. 음수는 뒤에서 센 차원 번호라, 3단계의 4차원 텐서에도 그대로 통한다. ([torch.transpose 문서](https://docs.pytorch.org/docs/stable/generated/torch.transpose.html))
+### `key.transpose` 인자 `(-2, -1)`의 의미
+
+마지막 두 차원(토큰 수, d_k)을 맞바꿔 $K^T$를 만든다. 음수는 뒤에서 센 차원 번호라 3단계의 4차원 텐서에도 그대로 통한다. ([torch.transpose 문서](https://docs.pytorch.org/docs/stable/generated/torch.transpose.html))
