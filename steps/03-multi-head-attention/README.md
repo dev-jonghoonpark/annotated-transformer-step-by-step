@@ -58,4 +58,6 @@ PyTorch는 모양이 다른 텐서를 **오른쪽 끝부터** 맞춘다(브로�
 
 ### `@` 연산
 
-`a @ b`는 파이썬의 행렬곱 연산자로, PyTorch에서는 `torch.matmul(a, b)`와 같다(실제 코드는 `torch.matmul`로 쓰여 있다).
+`a @ b`는 파이썬의 행렬곱 연산자로, PyTorch에서는 `torch.matmul(a, b)`와 같다(실제 코드는 `torch.matmul`로 쓰여 있다). 3차원 이상이면 앞 축은 묶음으로 두고 마지막 두 축끼리만 곱한다. ([torch.matmul 문서](https://docs.pytorch.org/docs/stable/generated/torch.matmul.html))
+
+> 주의: `a * b`는 행렬곱이 아니라 같은 위치끼리 곱하는 원소별 곱이다.
